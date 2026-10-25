@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <!-- Outer Shield Contour -->
+  <path d="M32 4L54 13V29C54 44.5 44.5 56.5 32 60C19.5 56.5 10 44.5 10 29V13L32 4Z" fill="#101827" stroke="#35E0D0" stroke-width="2.5" stroke-linejoin="round"/>
+  
+  <!-- Floor Grid Perspective Lines at Bottom of Shield -->
+  <path d="M18 42L46 42" stroke="#29374B" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M15 47L49 47" stroke="#29374B" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M22 38L14 52" stroke="#29374B" stroke-width="1.5"/>
+  <path d="M28 38L24 53" stroke="#29374B" stroke-width="1.5"/>
+  <path d="M36 38L40 53" stroke="#29374B" stroke-width="1.5"/>
+  <path d="M42 38L50 52" stroke="#29374B" stroke-width="1.5"/>
+
+  <!-- Concentric IoT Radar / Signal Wave from Pressure Center -->
+  <path d="M22 25C24.5 21 28 19 32 19C36 19 39.5 21 42 25" stroke="#438BFF" stroke-width="2" stroke-linecap="round" opacity="0.8"/>
+  <path d="M26 28C27.5 25.5 29.5 24 32 24C34.5 24 36.5 25.5 38 28" stroke="#35E0D0" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- Smart Pressure Sole / Detection Node Motif -->
+  <!-- Heel -->
+  <ellipse cx="32" cy="39" rx="4.5" ry="3.5" fill="#35E0D0"/>
+  <!-- Ball of foot -->
+  <path d="M27 31C27 28.5 29 27 32 27C35 27 37 28.5 37 31C37 33.5 35 34.5 32 34.5C29 34.5 27 33.5 27 31Z" fill="#35E0D0"/>
+  
+  <!-- Central Pulse Core -->
+  <circle cx="32" cy="31" r="1.5" fill="#080D18"/>
+  <!-- IoT Beacon Top Node -->
+  <circle cx="32" cy="13" r="2.5" fill="#35E0D0"/>
+  <circle cx="32" cy="13" r="1" fill="#FFFFFF"/>
+</svg>

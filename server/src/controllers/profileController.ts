@@ -1,0 +1,66 @@
+import { Request, Response } from 'express';
+import { store } from '../database/store';
+import { EnrolledProfile } from '../../src/types/profiles';
+
+export const getProfiles = (_req: Request, res: Response) => {
+  const profiles = store.getProfiles();
+  return res.json({ success: true, count: profiles.length, data: profiles });
+};
+
+export const enrollProfile = (req: Request, res: Response) => {
+  const { name, role = 'Authorized Staff', photoPreviewUrl, descriptor, notes, consentGranted } = req.body;
+
+  if (!consentGranted) {
+    return res.status(400).json({
+      success: false,
+      error: 'Explicit authorization/consent is strictly required to enroll biometric reference profiles.'
+    });
+  }
+
+  if (!name || typeof name !== 'string' || name.trim().length === 0) {
+    return res.status(400).json({
+      success: false,
+      error: 'Profile display name is required.'
+    });
+  }
+
+  if (!descriptor || !Array.isArray(descriptor) || descriptor.length !== 128) {
+    return res.status(400).json({
+      success: false,
+      error: 'Invalid face descriptor. A valid 128-dimensional embedding vector is required.'
+    });
+  }
+
+  const newProfile: EnrolledProfile = {
+    id: `PROF-${Date.now().toString(36).toUpperCase()}-${Math.floor(Math.random() * 1000)}`,
+    name: name.trim(),
+    role,
+    enrolledAt: new Date().toISOString(),
+    photoPreviewUrl,
+    descriptor,
+    notes,
+    consentGranted: true
+  };
+
+  store.addProfile(newProfile);
+
+  return res.status(201).json({
+    success: true,
+    message: `Reference profile for "${newProfile.name}" enrolled successfully.`,
+    data: newProfile
+  });
+};
+
+export const deleteProfile = (req: Request, res: Response) => {
+  const { id } = req.params;
+  const deleted = store.deleteProfile(id);
+  if (!deleted) {
+    return res.status(404).json({ success: false, error: 'Profile not found' });
+  }
+  return res.json({ success: true, message: 'Profile deleted successfully.' });
+};
+
+export const clearAllProfiles = (_req: Request, res: Response) => {
+  store.clearProfiles();
+  return res.json({ success: true, message: 'All enrolled reference profiles cleared.' });
+};
